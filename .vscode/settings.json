@@ -1,0 +1,45 @@
+{
+  // LaTeX Workshop 自定义配置
+  // 只覆盖与插件默认值不同的部分
+
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-xelatex",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-shell-escape",
+        "-file-line-error",
+        "%DOC%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "bibtex",
+      "command": "bibtex",
+      "args": [
+        "%DOCFILE%"
+      ],
+      "env": {}
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "xelatexmk",
+      "tools": [
+        "latexmk"
+      ]
+    },
+    {
+      "name": "xelatex -> bibtex -> xelatex * 2",
+      "tools": [
+        "latexmk",
+        "bibtex",
+        "latexmk",
+        "latexmk"
+      ]
+    }
+  ]
+}

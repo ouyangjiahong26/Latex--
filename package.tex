@@ -1,47 +1,36 @@
+% ============================
+% §1 数学包
+% ============================
 \usepackage{amsmath}                                    % 排版数学公式
+\usepackage{latexsym}
+\usepackage{amsfonts}                                   % AMS 数学字体（Computer Modern 补充符号字体）
+\usepackage{amssymb}                                    % AMS 数学符号命令
+\usepackage{amscd}                                      % 交换图环境（如不用可删除）
+\usepackage{mathrsfs}                                   % 数学 RSFS 书写字体
+\usepackage{bm}                                         % 数学黑体（\bm 命令）
+\usepackage{physics}                                    % 物理公式排版
+\usepackage[math-style=ISO]{unicode-math}               % 使用 ISO 数学风格
 
-% 使equation计数器也依赖于section计数器
+% 计数器依赖 section
 \numberwithin{equation}{section}
-
-% 使table计数器也依赖于section计数器
 \numberwithin{table}{section}
-
-% 使figure计数器也依赖于section计数器
 \numberwithin{figure}{section}
 
-\usepackage{latexsym}
-\usepackage{amsfonts}                                   %数学符号字体库宏包套件，它包含有：amsfonts、amssymb、eufrak 和 eucal 四个宏包。
-\usepackage{amssymb}                                    % 定义AMS的数学符号命令
-\usepackage{mathrsfs}                                   % 数学RSFS书写字体
-\usepackage{bm}                                         % 数学黑体
-\usepackage{graphicx}                                   % 支持插图,图形宏包graphics的扩展宏包
+% ============================
+% §2 排版格式包
+% ============================
+\usepackage{graphicx}                                   % 支持插图
 \usepackage{color,xcolor}                               % 支持彩色
-\usepackage{amscd}
-\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
-\usepackage{diagbox}
-\usepackage{minted}
-\usepackage{titlesec}                                   %设置章节格式
-\usepackage{tcolorbox}
+\usepackage{titlesec}                                   % 设置章节格式
+\usepackage{tcolorbox}                                  % 彩色文本框
+\usepackage{enumerate}                                  % 更改 enumerate 环境格式
+\usepackage[perpage]{footmisc}                          % 脚注每页重新编号
 
 % 设置 paragraph 为只有一级编号（从1开始）
-\renewcommand{\theparagraph}{\arabic{paragraph}} % 只显示一级编号
+\renewcommand{\theparagraph}{\arabic{paragraph}}
 \makeatletter
-\@addtoreset{paragraph}{section} % 每节开始时重置 paragraph 计数器
+\@addtoreset{paragraph}{section}                        % 每节开始时重置 paragraph 计数器
 \makeatother
-
-%%文本框设置
-\newcommand{\tbox}[1]{
-  \begin{center}
-    \begin{tcolorbox}[colback=gray!10,%gray background
-        colframe=black,% black frame colour
-        width=14cm,% Use 8cm total width,
-        arc=1mm, auto outer arc,
-        boxrule=0.5pt,
-      ]
-      {#1}
-    \end{tcolorbox}
-  \end{center}
-}
 
 % 设置 paragraph 为 block 风格，自动换行
 \titleformat{\paragraph}[block]
@@ -49,36 +38,40 @@
 
 % 设置标题后换行（after-sep 设为 \newline）
 \titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0pt}
-  
-\usepackage{enumerate}                                 	%更改enumerate环境格式
+
+% ============================
+% §3 代码与算法包
+% ============================
+\usepackage{minted}                                     % 代码高亮
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}    % 算法排版
+
+% ============================
+% §4 表格与图表包
+% ============================
+\usepackage{diagbox}                                    % 表格斜线表头
+\usepackage{tabularx}                                   % 自动调整列宽
+\usepackage{multirow}                                   % 合并行
+\usepackage{subcaption}                                 % 子图和子标题
+\usepackage{minipage-marginpar}                         % minipage 中使用 marginpar
+\usepackage{float}                                      % 提供 float 浮动环境
+\usepackage{booktabs}                                   % 三线表（\toprule、\midrule、\bottomrule）
+\usepackage{listings}                                   % 代码排版（非高亮）
+
+% ============================
+% §5 引用与超链接包
+% ============================
 \usepackage{hyperref}
 
-%改变超链接颜色
+% 改变超链接颜色
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=blue,      
+    filecolor=blue,
     urlcolor=blue,
     citecolor=cyan,
 }
 
-\usepackage{subcaption}
-\usepackage{minipage-marginpar}
-\usepackage{float}%提供float浮动环境
-\usepackage{booktabs}%提供命令\toprule、\midrule、\bottomrule
-\usepackage{listings}
-\usepackage{xcolor}
-\usepackage{tabularx}
-\usepackage{multirow}
-\usepackage[perpage]{footmisc}
-
-% 自定义命令，用于角标引用文献和交叉引用
-\newcommand{\scite}[1]{\textsuperscript{\cite{#1}}}
-\newcommand{\sref}[1]{\textsuperscript{\ref{#1}}}
-\newcommand{\bs}[1]{\boldsymbol{#1}}
-\newcommand{\romannumber}[1]{\uppercase\expandafter{\romannumeral#1}}
-\newcommand{\alert}[1]{\textcolor{red}{#1}}
-%%对一些autoref的中文引用名作修改
+% autoref 中文引用名
 \def\equationautorefname{式}
 \def\footnoteautorefname{脚注}
 \def\itemautorefname{项}
@@ -89,12 +82,44 @@
 \def\chapterautorefname{章}
 \def\sectionautorefname{节}
 \def\subsectionautorefname{小小节}
-\def\subsubsectionautorefname{subsubsection}
+\def\subsubsectionautorefname{小小小节}
 \def\paragraphautorefname{段落}
 \def\subparagraphautorefname{子段落}
 \def\FancyVerbLineautorefname{行}
 \def\theoremautorefname{定理}
 
-% 设置标题层级和目录层级
+% ============================
+% §6 标题层级与目录设置
+% ============================
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{4}
+
+% ============================
+% §7 自定义命令
+% ============================
+% 角标引用文献和交叉引用
+\newcommand{\scite}[1]{\textsuperscript{\cite{#1}}}
+\newcommand{\sref}[1]{\textsuperscript{\ref{#1}}}
+% boldsymbol 简写别名（等价于 bm 包的 \bm）
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+% 罗马数字
+\newcommand{\romannumber}[1]{\uppercase\expandafter{\romannumeral#1}}
+% 红色警示文本
+\newcommand{\alert}[1]{\textcolor{red}{#1}}
+
+% 彩色文本框，宽度自适应版心
+\newcommand{\tbox}[1]{
+  \begin{center}
+    \begin{tcolorbox}[colback=gray!10,
+        colframe=black,
+        width=\linewidth,
+        arc=1mm, auto outer arc,
+        boxrule=0.5pt,
+      ]
+      {#1}
+    \end{tcolorbox}
+  \end{center}
+}
+
+% 法语强调下划线
+\newcommand{\fri}[1]{\underline{#1}}
